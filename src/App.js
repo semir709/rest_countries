@@ -7,7 +7,11 @@ import { useState } from "react";
 function App() {
   const [dark, setDark] = useState(false);
   return (
-    <>
+    <div
+      className={`min-h-screen ${
+        dark ? "bg-custom--very-dark-blue-bg" : "bg-custom-white"
+      }`}
+    >
       <Routes>
         <Route
           path="/*"
@@ -15,7 +19,7 @@ function App() {
         ></Route>
         <Route path="/country" element={<Country />}></Route>
       </Routes>
-    </>
+    </div>
   );
 }
 

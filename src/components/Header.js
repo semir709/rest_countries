@@ -12,7 +12,7 @@ const Header = ({ dark, setDark }) => {
       <Link to={"/"}>
         <h1
           className={`font-extrabold sm:text-xl text-lg cursor-pointer ${
-            dark === true ? "text-custom-white" : "text-black"
+            dark ? "text-custom-white" : "text-black"
           }`}
         >
           Where in the world?
@@ -28,7 +28,7 @@ const Header = ({ dark, setDark }) => {
         </div>
         <p
           className={`text-md ${
-            dark === true ? "text-custom-light-gray" : "text-black"
+            dark ? "text-custom-light-gray" : "text-black"
           }`}
         >
           Dark mode
