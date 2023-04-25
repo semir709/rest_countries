@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "../components/Header";
 
-const Home = () => {
+const Home = ({ dark, setDark }) => {
   return (
     <>
-      <Header />
+      <Header dark={dark} setDark={setDark} />
     </>
   );
 };
