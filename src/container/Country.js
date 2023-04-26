@@ -24,10 +24,12 @@ const Country = ({ dark, setDark }) => {
     <>
       <Header dark={dark} setDark={setDark} />
 
-      <div className="my-[40px] sm:px-[100px]">
+      <div className="my-[40px] sm:px-[100px] text-custom-detail">
         <button
-          onClick={() => navigate(-1)}
-          className=" mb-[50px] drop-shadow-md bg-white w-fit px-5 py-1 rounded-md flex items-center justify-between"
+          onClick={() => navigate("/")}
+          className={`mb-[50px] drop-shadow-md w-fit px-5 py-1 rounded-md flex items-center justify-between ${
+            dark ? "bg-custom-dark-blue text-custom-light-gray" : "bg-white"
+          }`}
         >
           <div className="me-2">
             <BsArrowLeft />
@@ -44,48 +46,56 @@ const Country = ({ dark, setDark }) => {
             />
           </div>
 
-          <div className="w-1/2 px-[100px] ">
+          <div
+            className={`w-1/2 px-[100px] ${
+              dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
+            }`}
+          >
             <h1 className="font-extrabold text-4xl mb-5">Albanija</h1>
 
             <div className="flex w-full justify-between text-custom-detail">
               <div>
-                <p className="mb-1 font-extrabold">
+                <p className="mb-1 font-semibold">
                   Native names: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-extrabold">
+                <p className="mb-1 font-semibold">
                   Population: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-extrabold">
+                <p className="mb-1 font-semibold">
                   Region: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-extrabold">
+                <p className="mb-1 font-semibold">
                   Sub Region: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-extrabold">
+                <p className="mb-1 font-semibold">
                   Capital: <span className="font-normal">1000</span>
                 </p>
               </div>
 
               <div>
-                <p className="mb-1 font-extrabold">
+                <p className="mb-1 font-semibold">
                   Top Level Domain: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-extrabold">
+                <p className="mb-1 font-semibold">
                   Currencies: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-extrabold">
+                <p className="mb-1 font-semibold">
                   Languages: <span className="font-normal">1000</span>
                 </p>
               </div>
             </div>
 
             <div className="flex items-center mt-[80px]">
-              <p className="me-2">Border Countries: </p>
+              <p className="me-2 font-semibold">Border Countries: </p>
               {list.map(({ name, slug }) => (
-                <Link to={"/country/slug"}>
+                <Link to={`/country/${slug}`}>
                   <div
                     key={slug}
-                    className="bg-white drop-shadow-lg text-custom-dark-gray rounded-md px-4 py-1 mx-1"
+                    className={`${
+                      dark
+                        ? "bg-custom-dark-blue text-custom-light-gray"
+                        : "bg-white text-custom-dark-gray"
+                    } drop-shadow-lg  rounded-md px-4 py-1 mx-1 font-normal`}
                   >
                     {name}
                   </div>
