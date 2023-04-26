@@ -17,7 +17,10 @@ function App() {
           path="/*"
           element={<Home dark={dark} setDark={setDark} />}
         ></Route>
-        <Route path="/country/:countryId" element={<Country />}></Route>
+        <Route
+          path="/country/:countryId"
+          element={<Country dark={dark} setDark={setDark} />}
+        ></Route>
       </Routes>
     </div>
   );
