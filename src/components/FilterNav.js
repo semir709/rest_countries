@@ -9,7 +9,9 @@ const FilterNav = () => {
         <SearchBar />
       </div>
 
-      <Filter />
+      <div className="w-[200px]">
+        <Filter />
+      </div>
     </div>
   );
 };
