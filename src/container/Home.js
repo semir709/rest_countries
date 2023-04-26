@@ -12,7 +12,7 @@ const Home = ({ dark, setDark }) => {
   return (
     <>
       <Header dark={dark} setDark={setDark} />
-      <FilterNav />
+      <FilterNav dark={dark} />
 
       <div className="flex flex-wrap min-[776px]:justify-between justify-around w-full sm:px-[100px] ">
         {loading

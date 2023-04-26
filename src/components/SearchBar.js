@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
-const SearchBar = () => {
+const SearchBar = ({ dark }) => {
   return (
     <div className="shadow-md w-full h-full py-3 px-5 rounded-md flex items-center">
       <div className="mr-5">
