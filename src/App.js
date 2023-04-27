@@ -8,7 +8,7 @@ function App() {
   const [dark, setDark] = useState(false);
   return (
     <div
-      className={`min-h-screen ${
+      className={`min-h-screen flex flex-col ${
         dark ? "bg-custom--very-dark-blue-bg" : "bg-custom-white"
       }`}
     >

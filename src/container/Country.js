@@ -24,7 +24,7 @@ const Country = ({ dark, setDark }) => {
     <>
       <Header dark={dark} setDark={setDark} />
 
-      <div className="my-[40px] sm:px-[100px] text-custom-detail">
+      <div className="my-[40px] sm:px-[100px] px-5 text-custom-detail">
         <button
           onClick={() => navigate("/")}
           className={`mb-[50px] drop-shadow-md w-fit px-5 py-1 rounded-md flex items-center justify-between ${
@@ -37,8 +37,8 @@ const Country = ({ dark, setDark }) => {
           <p>Back</p>
         </button>
 
-        <div className="flex w-full items-center">
-          <div className="w-1/2 h-96">
+        <div className="sm:flex  w-full items-center">
+          <div className="sm:w-1/2 sm:h-96 h-fit w-full">
             <img
               className="w-full h-full object-cover"
               src="https://flagcdn.com/al.svg"
@@ -47,60 +47,67 @@ const Country = ({ dark, setDark }) => {
           </div>
 
           <div
-            className={`w-1/2 px-[100px] ${
+            className={`sm:w-1/2 w-full sm:ps-[70px] sm:mt-0 mt-[70px]  ${
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >
-            <h1 className="font-extrabold text-4xl mb-5">Albanija</h1>
+            <h1 className="font-extrabold sm:text-4xl text-3xl mb-5">
+              Albanija
+            </h1>
 
-            <div className="flex w-full justify-between text-custom-detail">
-              <div>
-                <p className="mb-1 font-semibold">
+            <div className="flex w-full lg:flex-row flex-col justify-between text-custom-detail">
+              <div className="">
+                <p className="mb-1 font-semibold text-custom-detail">
                   Native names: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-semibold">
+                <p className="mb-1 font-semibold text-custom-detail">
                   Population: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-semibold">
+                <p className="mb-1 font-semibold text-custom-detail">
                   Region: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-semibold">
+                <p className="mb-1 font-semibold text-custom-detail">
                   Sub Region: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-semibold">
+                <p className="mb-1 font-semibold text-custom-detail">
                   Capital: <span className="font-normal">1000</span>
                 </p>
               </div>
 
               <div>
-                <p className="mb-1 font-semibold">
+                <p className="mb-1 font-semibold text-custom-detail lg:mt-0 mt-5">
                   Top Level Domain: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-semibold">
+                <p className="mb-1 font-semibold text-custom-detail">
                   Currencies: <span className="font-normal">1000</span>
                 </p>
-                <p className="mb-1 font-semibold">
+                <p className="mb-1 font-semibold text-custom-detail">
                   Languages: <span className="font-normal">1000</span>
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center mt-[80px]">
-              <p className="me-2 font-semibold">Border Countries: </p>
-              {list.map(({ name, slug }) => (
-                <Link to={`/country/${slug}`}>
-                  <div
-                    key={slug}
-                    className={`${
-                      dark
-                        ? "bg-custom-dark-blue text-custom-light-gray"
-                        : "bg-white text-custom-dark-gray"
-                    } drop-shadow-lg  rounded-md px-4 py-1 mx-1 font-normal`}
-                  >
-                    {name}
-                  </div>
-                </Link>
-              ))}
+            <div className="sm:flex items-center mt-[80px] lg:flex-row sm:flex-wrap w-full">
+              <p className="me-2 font-semibold text-custom-detail">
+                Border Countries:{" "}
+              </p>
+
+              <div className="flex flex-wrap">
+                {list.map(({ name, slug }) => (
+                  <Link to={`/country/${slug}`}>
+                    <div
+                      key={slug}
+                      className={`${
+                        dark
+                          ? "bg-custom-dark-blue text-custom-light-gray"
+                          : "bg-white text-custom-dark-gray"
+                      } drop-shadow-lg  rounded-md px-4 py-1 sm:mx-1 font-normal me-1 my-2 w-[130px] text-center `}
+                    >
+                      {name}
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
