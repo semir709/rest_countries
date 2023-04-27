@@ -12,7 +12,7 @@ const Card = ({ dark }) => {
           />
         </div>
         <div
-          className={`h-full w-full p-5 ${
+          className={`h-full w-full p-5  ${
             dark ? "bg-custom-dark-blue" : "bg-custom-white"
           }`}
         >
@@ -24,21 +24,21 @@ const Card = ({ dark }) => {
             Albanija
           </h3>
           <p
-            className={`text-custom-detail font-extrabold ${
+            className={`text-custom-detail font-semibold ${
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >
             Population: <span className="font-normal">10000</span>
           </p>
           <p
-            className={`text-custom-detail font-extrabold ${
+            className={`text-custom-detail font-semibold ${
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >
             Region: <span className="font-normal">10000</span>
           </p>
           <p
-            className={`text-custom-detail font-extrabold ${
+            className={`text-custom-detail font-semibold ${
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >

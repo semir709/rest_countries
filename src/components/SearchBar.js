@@ -5,7 +5,7 @@ const SearchBar = ({ dark }) => {
   const inputRef = useRef(null);
   return (
     <div
-      className={`shadow-md w-full h-full py-3 px-5 rounded-md flex items-center ${
+      className={`drop-shadow-[0px_0px_5px_rgba(0,0,0,0.25)] w-full h-full py-3 px-5 rounded-md flex items-center ${
         dark ? "bg-custom-dark-blue" : "bg-custom-white"
       }`}
     >

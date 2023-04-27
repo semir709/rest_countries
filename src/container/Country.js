@@ -27,7 +27,7 @@ const Country = ({ dark, setDark }) => {
       <div className="my-[40px] sm:px-[100px] px-5 text-custom-detail">
         <button
           onClick={() => navigate("/")}
-          className={`mb-[50px] drop-shadow-md w-fit px-5 py-1 rounded-md flex items-center justify-between ${
+          className={`mb-[50px] drop-shadow-[0px_0px_4px_rgba(0,0,0,0.25)] w-fit px-5 py-1 rounded-md flex items-center justify-between ${
             dark ? "bg-custom-dark-blue text-custom-light-gray" : "bg-white"
           }`}
         >
@@ -101,7 +101,7 @@ const Country = ({ dark, setDark }) => {
                         dark
                           ? "bg-custom-dark-blue text-custom-light-gray"
                           : "bg-white text-custom-dark-gray"
-                      } drop-shadow-lg  rounded-md px-4 py-1 sm:mx-1 font-normal me-1 my-2 w-[130px] text-center `}
+                      } drop-shadow-[0px_0px_2px_rgba(0,0,0,0.25)]  rounded-md px-4 py-1 sm:mx-1 font-normal me-1 my-2 w-[130px] text-center `}
                     >
                       {name}
                     </div>

@@ -22,7 +22,7 @@ const Filter = ({ dark }) => {
     <div className="relative">
       <div
         onClick={() => setToggle(!toggle)}
-        className={`drop-shadow-md w-full h-ful py-3 px-5 rounded-md flex justify-between items-center cursor-pointer ${
+        className={`drop-shadow-[0px_0px_5px_rgba(0,0,0,0.25)] w-full h-ful py-3 px-5 rounded-md flex justify-between items-center cursor-pointer ${
           dark ? "bg-custom-dark-blue" : "bg-custom-white"
         }`}
       >
