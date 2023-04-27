@@ -1,15 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Card = ({ dark }) => {
+const Card = ({ dark, data: { name, capital, population, region, flags } }) => {
   return (
-    <Link to={"/country/albanija"}>
-      <div className=" min-[300px]:w-[280px] w-full h-[300px] my-2 mx-1 shadow-md rounded-md overflow-hidden cursor-pointer">
+    <Link to={"/country/albanija"} className=" w-full ">
+      <div className=" h-[390px] my-2 shadow-md rounded-md overflow-hidden cursor-pointer]">
         <div className="w-full h-1/2  ">
-          <img
-            className="w-full h-full object-cover "
-            src="https://flagcdn.com/al.svg"
-            alt=""
-          />
+          <img className="w-full h-full object-cover " src={flags.svg} alt="" />
         </div>
         <div
           className={`h-full w-full p-5  ${
@@ -21,28 +17,28 @@ const Card = ({ dark }) => {
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >
-            Albanija
+            {name.official}
           </h3>
           <p
             className={`text-custom-detail font-semibold ${
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >
-            Population: <span className="font-normal">10000</span>
+            Population: <span className="font-normal">{population}</span>
           </p>
           <p
             className={`text-custom-detail font-semibold ${
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >
-            Region: <span className="font-normal">10000</span>
+            Region: <span className="font-normal">{region}</span>
           </p>
           <p
             className={`text-custom-detail font-semibold ${
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >
-            Capital: <span className="font-normal">10000</span>
+            Capital: <span className="font-normal">{capital}</span>
           </p>
         </div>
       </div>

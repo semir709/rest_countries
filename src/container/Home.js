@@ -1,20 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Card from "../components/Card";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import FilterNav from "../components/FilterNav";
+import axios from "axios";
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const el = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const baseUrl =
+  "https://restcountries.com/v3.1/all?fields=name,capital,population,region,flags";
 
 const Home = ({ dark, setDark }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [storeData, setStoreData] = useState([]);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    axios.get(baseUrl).then((obj) => {
+      setStoreData(obj.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    setData(storeData.slice(index, index + 20));
+    setLoading(false);
+  }, [storeData, index]);
+
   return (
     <>
       <Header dark={dark} setDark={setDark} />
       <FilterNav dark={dark} />
 
-      <div className="flex flex-wrap min-[776px]:justify-between justify-around w-full sm:px-[100px] ">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 col-span-full gap-8 w-full sm:px-[100px] px-[50px] ">
         {loading
           ? data.map(() => (
               <div className="min-[300px]:w-[280px] w-full h-[300px] my-2 mx-1 shadow-md rounded-md overflow-hidden cursor-pointer">
@@ -29,7 +47,9 @@ const Home = ({ dark, setDark }) => {
                 )}
               </div>
             ))
-          : data.map(() => <Card dark={dark} />)}
+          : data.map((data, index) => (
+              <Card key={index} data={data} dark={dark} />
+            ))}
       </div>
     </>
   );
