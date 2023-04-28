@@ -33,7 +33,7 @@ const Home = ({ dark, setDark }) => {
       <FilterNav dark={dark} />
 
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 col-span-full gap-8 w-full sm:px-[100px] px-[50px] ">
-        {loading
+        {loading && storeData.length === 0
           ? data.map(() => (
               <div className="min-[300px]:w-[280px] w-full h-[300px] my-2 mx-1 shadow-md rounded-md overflow-hidden cursor-pointer">
                 {dark ? (

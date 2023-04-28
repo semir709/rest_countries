@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const Card = ({ dark, data: { name, capital, population, region, flags } }) => {
   return (
-    <Link to={"/country/albanija"} className=" w-full ">
+    <Link to={`/country/${name.common.toLowerCase()}`} className=" w-full ">
       <div className=" h-[390px] my-2 shadow-md rounded-md overflow-hidden cursor-pointer]">
         <div className="w-full h-1/2  ">
           <img className="w-full h-full object-cover " src={flags.svg} alt="" />
