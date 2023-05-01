@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import axios from "axios";
-import { ThreeDots } from "react-loader-spinner";
+import Skeleton from "react-loading-skeleton";
 
 const Country = ({ dark, setDark }) => {
   const navigate = useNavigate();
@@ -133,8 +133,33 @@ const Country = ({ dark, setDark }) => {
             </div>
           </div>
         ) : (
-          <div className="w-full flex justify-center">
-            <ThreeDots height="60" width="60" radius="9" color="black" />
+          <div className="sm:flex  w-full items-center">
+            {" "}
+            <div className="sm:w-1/2 sm:h-96 h-fit w-full">
+              {dark ? (
+                <Skeleton
+                  className="my-2"
+                  height={500}
+                  baseColor="hsl(209, 23%, 22%)"
+                  highlightColor={"hsl(207, 26%, 17%)"}
+                />
+              ) : (
+                <Skeleton height={500} />
+              )}
+            </div>
+            <div className="sm:w-1/2 w-full sm:ps-[70px] sm:mt-0 mt-[70px]">
+              {dark ? (
+                <Skeleton
+                  className="my-2"
+                  height={30}
+                  count={6}
+                  baseColor="hsl(209, 23%, 22%)"
+                  highlightColor={"hsl(207, 26%, 17%)"}
+                />
+              ) : (
+                <Skeleton count={8} height={30} />
+              )}
+            </div>
           </div>
         )}
       </div>
