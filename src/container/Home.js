@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Card from "../components/Card";
 import Skeleton from "react-loading-skeleton";
@@ -10,23 +10,33 @@ const baseUrl =
   "https://restcountries.com/v3.1/all?fields=name,capital,population,region,flags";
 
 const Home = ({ dark, setDark }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [skeletonLoading, setSkeletonLoading] = useState(false);
   const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);
-  const [index, setIndex] = useState(0);
+  const [page, setPage] = useState(1);
+  const firstCardIndex = 0;
+  const maxCardIndex = useRef(20);
 
+  //skeleton loading
   useEffect(() => {
+    setSkeletonLoading(true);
     axios.get(baseUrl).then((obj) => {
       setStoreData(obj.data);
+      setSkeletonLoading(false);
     });
   }, []);
 
   useEffect(() => {
-    // setData(storeData.slice(index, index + 20));
-    setLoading(false);
-  }, [storeData, index]);
-
-  const leng = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+    if (page > 1) {
+      // setLoading(true);
+      maxCardIndex.current += 20;
+      setData(storeData.slice(firstCardIndex, maxCardIndex.current));
+      // setLoading(false);
+    } else {
+      setData(storeData.slice(firstCardIndex, maxCardIndex.current));
+    }
+  }, [storeData, page]);
 
   return (
     <>
@@ -34,7 +44,7 @@ const Home = ({ dark, setDark }) => {
       <FilterNav dark={dark} />
 
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 col-span-full gap-8 w-full sm:px-[100px] px-[50px] my-5">
-        {data.length === 0
+        {skeletonLoading
           ? Array(12)
               .fill()
               .map(() => (
@@ -53,7 +63,11 @@ const Home = ({ dark, setDark }) => {
           : data.map((data, index) => (
               <Card key={index} data={data} dark={dark} />
             ))}
+
+        <button onClick={() => setPage((prev) => prev + 1)}>Click</button>
       </div>
+
+      {loading && <p>Loading...</p>}
     </>
   );
 };
