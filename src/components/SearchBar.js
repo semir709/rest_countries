@@ -1,8 +1,19 @@
 import React, { useRef } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ dark }) => {
+const SearchBar = ({ dark, searchValue, setSearchValue }) => {
   const inputRef = useRef(null);
+  const navigate = useNavigate();
+
+  const searchFunc = () => {
+    console.log("jey");
+    if (inputRef.current.value === "") navigate("/");
+    else {
+      setSearchValue(inputRef.current.value);
+      navigate("/search");
+    }
+  };
   return (
     <div
       className={`drop-shadow-[0px_0px_5px_rgba(0,0,0,0.25)] w-full h-full py-3 px-5 rounded-md flex items-center ${
@@ -32,6 +43,7 @@ const SearchBar = ({ dark }) => {
           }`}
           type="text"
           placeholder="Search for a country..."
+          onInput={searchFunc}
         />
       </div>
     </div>
