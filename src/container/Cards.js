@@ -26,10 +26,12 @@ const Cards = ({ dark, setDark }) => {
   useEffect(() => {
     setReduceData(filterData.slice(firstCardIndex, maxCardIndex));
 
-    if (reduceData.length === data.length) setHasMore(false);
-
     setSkeletonLoading(false);
   }, [filterData, maxCardIndex]);
+
+  useEffect(() => {
+    if (reduceData.length === data.length) setHasMore(false);
+  }, [reduceData]);
 
   const nextData = () => {
     setMaxCardIndex((prev) => prev + 20);

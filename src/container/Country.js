@@ -4,30 +4,56 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
+import data from "../data.json";
 
 const Country = ({ dark, setDark }) => {
   const navigate = useNavigate();
   const param = useParams();
-  const baseUrl = `https://restcountries.com/v3.1/name/${param.countryId}?fields=name,capital,population,region,flags,nativeName,subregion,tld,currencies,languages,borders`;
-  const [data, setData] = useState(null);
   const [bordersCoun, setBordersCoun] = useState([]);
+  const [reduceData, setReduceData] = useState(null);
 
   useEffect(() => {
-    axios.get(baseUrl).then((obj) => {
-      setData(obj.data[0]);
+    const filter = data.filter(({ name }) => {
+      return name.toLowerCase() === param.countryId;
     });
-  }, [baseUrl]);
+
+    const reduce = filter.map(
+      ({
+        name,
+        capital,
+        population,
+        region,
+        flags,
+        topLevelDomain,
+        currencies,
+        languages,
+        borders,
+      }) => {
+        return {
+          name,
+          capital,
+          population,
+          region,
+          flags,
+          topLevelDomain,
+          currencies,
+          languages,
+          borders,
+        };
+      }
+    );
+    setReduceData(reduce[0]);
+  }, [param]);
 
   useEffect(() => {
-    if (data) {
-      const url = `https://restcountries.com/v3.1/alpha?codes=${data.borders.map(
-        (el) => el
-      )}&fields=name`;
-      axios.get(url).then((bordersCountry) => {
-        setBordersCoun(bordersCountry.data);
+    if (reduceData) {
+      const filter = data.filter(({ alpha3Code }) => {
+        return reduceData.borders.includes(alpha3Code);
       });
+
+      setBordersCoun(filter);
     }
-  }, [data]);
+  }, [reduceData]);
   return (
     <>
       <Header dark={dark} setDark={setDark} />
@@ -45,13 +71,13 @@ const Country = ({ dark, setDark }) => {
           <p>Back</p>
         </button>
 
-        {data ? (
+        {reduceData ? (
           <div className="sm:flex  w-full items-center">
             <div className="sm:w-1/2 sm:h-96 h-fit w-full">
               <img
                 className="w-full h-full object-cover"
-                src={data.flags.svg}
-                alt={data.flags.alt}
+                src={reduceData.flags.svg}
+                alt={reduceData.flags.alt}
               />
             </div>
 
@@ -61,48 +87,62 @@ const Country = ({ dark, setDark }) => {
               }`}
             >
               <h1 className="font-extrabold sm:text-4xl text-3xl mb-5">
-                {data.name.official}
+                {reduceData.name.official}
               </h1>
 
               <div className="flex w-full lg:flex-row flex-col justify-between text-custom-detail">
                 <div className="">
                   <p className="mb-1 font-semibold text-custom-detail">
                     Native names:{" "}
-                    <span className="font-normal">
-                      {Object.values(data.name.nativeName)[0].official}
-                    </span>
+                    <span className="font-normal">{reduceData.name}</span>
                   </p>
                   <p className="mb-1 font-semibold text-custom-detail">
                     Population:{" "}
-                    <span className="font-normal">{data.population}</span>
+                    <span className="font-normal">{reduceData.population}</span>
                   </p>
                   <p className="mb-1 font-semibold text-custom-detail">
-                    Region: <span className="font-normal">{data.region}</span>
+                    Region:{" "}
+                    <span className="font-normal">{reduceData.region}</span>
                   </p>
                   <p className="mb-1 font-semibold text-custom-detail">
                     Sub Region:{" "}
-                    <span className="font-normal">{data.subregion}</span>
+                    <span className="font-normal">{reduceData.subregion}</span>
                   </p>
                   <p className="mb-1 font-semibold text-custom-detail">
-                    Capital: <span className="font-normal">{data.capital}</span>
+                    Capital:{" "}
+                    <span className="font-normal">{reduceData.capital}</span>
                   </p>
                 </div>
 
                 <div>
                   <p className="mb-1 font-semibold text-custom-detail lg:mt-0 mt-5">
                     Top Level Domain:{" "}
-                    <span className="font-normal">{data.tld}</span>
-                  </p>
-                  <p className="mb-1 font-semibold text-custom-detail">
-                    Currencies:{" "}
                     <span className="font-normal">
-                      {Object.values(data.currencies)[0].name}
+                      {reduceData.topLevelDomain}
                     </span>
                   </p>
                   <p className="mb-1 font-semibold text-custom-detail">
+                    Currencies:{" "}
+                    {reduceData.currencies.map(({ name }, index) => (
+                      <span className="font-normal me-1" key={index}>
+                        {name +
+                          `${
+                            reduceData.currencies.length - 1 === index
+                              ? ""
+                              : ","
+                          }`}
+                      </span>
+                    ))}
+                  </p>
+                  <p className="mb-1 font-semibold text-custom-detail">
                     Languages:{" "}
-                    {Object.values(data.languages).map((el) => (
-                      <span className="font-normal me-1">{el}</span>
+                    {reduceData.languages.map(({ name }, index) => (
+                      <span className="font-normal me-1" key={index}>
+                        {name +
+                          `${
+                            reduceData.languages.length - 1 === index ? "" : ","
+                          }`}
+                      </span>
                     ))}
                   </p>
                 </div>
@@ -115,16 +155,15 @@ const Country = ({ dark, setDark }) => {
 
                 <div className="flex flex-wrap">
                   {bordersCoun.map((el, index) => (
-                    <Link to={`/country/${el.name.common}`}>
+                    <Link key={index} to={`/country/${el.name.toLowerCase()}`}>
                       <div
-                        key={index}
                         className={`${
                           dark
                             ? "bg-custom-dark-blue text-custom-light-gray"
                             : "bg-white text-custom-dark-gray"
-                        } drop-shadow-[0px_0px_2px_rgba(0,0,0,0.25)]  rounded-md px-4 py-1 sm:mx-1 font-normal me-1 my-2 w-[130px] text-center `}
+                        } drop-shadow-[0px_0px_2px_rgba(0,0,0,0.25)]  rounded-md px-4 py-1 sm:mx-1 font-normal me-1 my-2 min-w-[130px] text-center `}
                       >
-                        {el.name.common}
+                        {el.name}
                       </div>
                     </Link>
                   ))}
