@@ -17,7 +17,7 @@ const Card = ({ dark, data: { name, capital, population, region, flags } }) => {
               dark ? "text-custom-white" : "text-custom-very-dark-blue-text"
             }`}
           >
-            {name.official}
+            {name}
           </h3>
           <p
             className={`text-custom-detail font-semibold ${

@@ -7,7 +7,6 @@ const SearchBar = ({ dark, searchValue, setSearchValue }) => {
   const navigate = useNavigate();
 
   const searchFunc = () => {
-    console.log("jey");
     if (inputRef.current.value === "") navigate("/");
     else {
       setSearchValue(inputRef.current.value);
