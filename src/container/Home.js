@@ -6,15 +6,19 @@ import FilterNav from "../components/FilterNav";
 import Search from "./Search";
 import { Route, Routes } from "react-router-dom";
 import Cards from "./Cards";
+import FilterPage from "./FilterPage";
 
 const Home = ({ dark, setDark }) => {
   const [searchValue, setSearchValue] = useState("");
+  const [filterData, setFilterData] = useState(null);
+
   return (
     <>
       <Header dark={dark} setDark={setDark} />
       <FilterNav
         dark={dark}
         searchValue={searchValue}
+        setFilterData={setFilterData}
         setSearchValue={setSearchValue}
       />
 
@@ -23,6 +27,12 @@ const Home = ({ dark, setDark }) => {
           path="/search"
           element={
             <Search dark={dark} setDark={setDark} searchValue={searchValue} />
+          }
+        ></Route>
+        <Route
+          path="/filter"
+          element={
+            <FilterPage dark={dark} setDark={setDark} filterData={filterData} />
           }
         ></Route>
         <Route

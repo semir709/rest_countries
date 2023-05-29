@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const list = [
   {
@@ -14,10 +15,26 @@ const list = [
     name: "Europe",
     slug: "europe",
   },
+  {
+    name: "Default",
+    slug: "default",
+  },
 ];
 
-const Filter = ({ dark }) => {
+const Filter = ({ dark, setFilterData }) => {
   const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
+
+  const onFilter = (e) => {
+    setToggle(false);
+    const filterValue = e.target.innerHTML.toLowerCase();
+
+    if (filterValue === "default") navigate("/");
+    else {
+      setFilterData(filterValue);
+      navigate("/filter");
+    }
+  };
   return (
     <div className="relative">
       <div
@@ -50,7 +67,7 @@ const Filter = ({ dark }) => {
         >
           {list.map(({ name, slug }) => (
             <p
-              onClick={() => setToggle(false)}
+              onClick={onFilter}
               className={`my-2 mx-2 cursor-pointer rounded-md py-1 px-4 ${
                 dark
                   ? "text-custom-white hover:bg-custom--very-dark-blue-bg"
