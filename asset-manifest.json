@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/rest_countries/static/css/main.add64cd5.css",
+    "main.js": "/rest_countries/static/js/main.3485afe4.js",
+    "index.html": "/rest_countries/index.html",
+    "main.add64cd5.css.map": "/rest_countries/static/css/main.add64cd5.css.map",
+    "main.3485afe4.js.map": "/rest_countries/static/js/main.3485afe4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.add64cd5.css",
+    "static/js/main.3485afe4.js"
+  ]
+}
